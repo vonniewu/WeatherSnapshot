@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 
 import { convertDtToDate, convertDtToDay } from './UserFunctions.js';
@@ -6,11 +6,8 @@ import { convertDtToDate, convertDtToDay } from './UserFunctions.js';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
@@ -25,7 +22,7 @@ const styles = theme => ({
     fontSize: 40,
   },
   timestamp: {
-    fontSize: 20,
+    fontSize: 24,
   },
   weatherDes: {
     fontSize: 16,
@@ -62,7 +59,9 @@ class TodayView extends Component {
       <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.title}>{this.props.data.name}, CA</Typography>
-          <Typography className={classes.timestamp}>{convertDtToDate(this.props.data.dt)} ({convertDtToDay(this.props.data.dt)})</Typography>
+          <Typography className={classes.timestamp}>
+            <i className="material-icons md-18 md-dark md-inactive">access_time</i>
+            {convertDtToDate(this.props.data.dt)} ({convertDtToDay(this.props.data.dt)})</Typography>
           <Typography className={classes.weatherDes}>{this.getWeatherDescriptions()}</Typography>
           <Grid container spacing={24}>
             <Grid item xs={6}>
@@ -76,14 +75,6 @@ class TodayView extends Component {
                 <Typography gutterBottom className={classes.info}>Pressure: {this.props.data && this.props.data.main ? this.props.data.main.pressure: null} hPa</Typography>
               </div>
             </Grid>
-            <Typography gutterBottom variant="body1">
-              Select Units:
-            </Typography>
-            <div>
-              <Chip className={classes.chip} label="Standard" />
-              <Chip className={classes.chip} label="Metric" />
-              <Chip className={classes.chip} label="Imperial" />
-            </div>
           </Grid>
         </CardContent>
       </Card>

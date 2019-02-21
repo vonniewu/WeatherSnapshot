@@ -29,7 +29,7 @@ function convertDtToDate(dt_timestamp) {
   var year = date_obj.getFullYear();
 
   // Will display time in MM/DD/YYYY format
-  return `${month} ${date}, ${year}`;
+  return `${month} ${date}`;
 }
 
 function convertDtToDay(dt_timestamp) {
