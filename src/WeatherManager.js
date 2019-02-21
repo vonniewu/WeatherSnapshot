@@ -11,6 +11,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
+  rootView: {
+    textAlign: 'center'
+  },
   button: {
     margin: theme.spacing.unit,
   },
@@ -107,16 +110,12 @@ class WeatherManager extends Component {
     const { classes } = this.props;
 
     return (
-      <React.Fragment>
-      <div>
+      <div className={classes.rootView}>
       <Button variant="outlined" color="primary" className={classes.button} onClick={() => { this.handleOnClick(1) }}>Today</Button>
       <Button variant="outlined" color="primary" className={classes.button} onClick={() => { this.handleOnClick(2) }}>This week</Button>
       <Button variant="outlined" color="primary" className={classes.button} onClick={() => { this.handleOnClick(3) }}>This month</Button>
-      </div>
-      <div>
       {this.displaySelectedView(this.state.selected_view)}
       </div>
-      </React.Fragment>
     );
   }
 }

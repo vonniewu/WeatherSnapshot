@@ -14,8 +14,6 @@ class WeekView extends Component {
   render() {
     console.log('Week View... ', this.props.data);
     return (
-      <React.Fragment>
-      <h1>Week View</h1>
       <div className="weathercards-container">{this.props.data.map((obj,index) =>
         <WeatherCard
         key={index}
@@ -32,7 +30,6 @@ class WeekView extends Component {
         humidity={obj.humidity}
         speed={obj.speed} />)}
       </div>
-      </React.Fragment>
     );
   }
 }
