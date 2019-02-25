@@ -6,7 +6,7 @@ import TodayView from './WeatherTodayView.js';
 import WeekView from './WeatherWeekView.js';
 import MonthView from './WeatherMonthView.js';
 import { fetchData } from '../UserFunctions.js';
-import { OPEN_WEATHER_API_KEY } from '../credentials.js';
+import { OPEN_WEATHER_API_KEY, DARK_SKY_API_KEY } from '../credentials.js';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -26,13 +26,21 @@ const styles = theme => ({
 
 
 class WeatherManager extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       daily_data: '',
       temp_data: [],
       selected_view: 1,
+      weekly_data: {},
+      latitude: '',
+      longitude: '',
+      darksky_daily: []
     };
+    this.fetchCurrentWeatherData = this.fetchCurrentWeatherData.bind(this);
+    this.fetchWeekWeatherData = this.fetchWeekWeatherData.bind(this);
+    this.fetchWeeklyDetailedData = this.fetchWeeklyDetailedData.bind(this);
   }
 
   fetchCurrentWeatherData(zipcode,format,unit) {
@@ -49,7 +57,17 @@ class WeatherManager extends Component {
       throw Error(response.statusText);
     })
     .then(response => response.json())
-    .then(json => this.setState({ daily_data: json}))
+    .then(response => {
+      console.log("fetchCurrentWeatherData.. Success: ", JSON.stringify(response));
+      this.setState({
+        latitude: response.coord.lat,
+        longitude: response.coord.lon
+      });
+      return response;
+    })
+    .then(json => this.setState({
+      daily_data: json }))
+    .catch(error => console.err('Error: ', error));
   }
 
   fetchWeekWeatherData(zipcode,format,unit) {
@@ -67,22 +85,48 @@ class WeatherManager extends Component {
     })
     .then(response => response.json())
     .then(json => this.setState({ temp_data: json.list}));
+
+    console.log("fetchWeekWeatherData.. daily_data: ", this.state.daily_data);
+  }
+
+  fetchWeeklyDetailedData() {
+    const proxy = 'https://cors-anywhere.herokuapp.com/';
+    // const API_CALL = proxy + `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/${this.state.latitude},${this.state.longitude}`;
+    const API_CALL = proxy + `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/33.69,-117.83`;
+
+    console.log("API CALL: ", API_CALL);
+
+    fetch(API_CALL).then(function(response) {
+      if (response.ok) {
+        return response;
+      }
+      throw Error(response.statusText);
+    })
+    .then(response => response.json())
+    .then(response => {
+      console.log("Dark Sky API response: ", response);
+      return response;
+    })
+    .then(json => this.setState({ darksky_daily: json.daily.data}));
   }
 
   componentDidMount() {
     this.fetchWeekWeatherData('92604','json','imperial');
     this.fetchCurrentWeatherData('92604','json','imperial');
+    this.fetchWeeklyDetailedData();
   }
 
   displaySelectedView(selected) {
     let selectedView;
+
+    console.log("displaySelectedView...", this.state);
 
     if (selected === 1) {
       selectedView = <TodayView data={this.state.daily_data} />;
     } else if (selected === 2) {
       selectedView = <WeekView data={this.state.temp_data} />;
     } else if (selected === 3) {
-      selectedView = <MonthView data={this.state.temp_data} />;
+      selectedView = <MonthView data={this.state.darksky_daily} />;
     }
     return selectedView;
   }
