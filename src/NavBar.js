@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import { OPEN_WEATHER_API_KEY } from './credentials.js';
+
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 
 import SettingsDialog from './SettingsDialog.js';
@@ -56,7 +56,7 @@ const styles = theme => ({
     color: 'inherit',
     width: '100%',
   },
-  inputInput: {
+  inputField: {
     paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
@@ -72,6 +72,9 @@ const styles = theme => ({
   },
   settings: {
     padding: theme.spacing.unit,
+  },
+  highlight: {
+    border: '1px solid red'
   }
 });
 
@@ -79,11 +82,48 @@ class NavBar extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      zipcode: '',
+      is_valid_zipcode: false,
+    };
     this.onChangeHandler = this.onChangeHandler.bind(this);
+    this.onKeyPressHandler = this.onKeyPressHandler.bind(this);
+    this.isValidZipcode = this.isValidZipcode.bind(this);
+  }
+
+  isValidZipcode(zipcode) {
+    const API_CALL = `https://api.openweathermap.org/data/2.5/weather?zip=${zipcode}&appid=${OPEN_WEATHER_API_KEY}`;
+
+    fetch(API_CALL)
+    .then(response => response.json())
+    .then(json => json.cod === '200')
+    .then(is_valid => this.setState({
+      is_valid_zipcode: is_valid
+    }))
+    .catch(error => console.log(error));
   }
 
   onChangeHandler(event) {
-    console.log("Inside of onChangeHandler...", event.target.value);
+    // console.log("Inside of onChangeHandler...", event.target.value);
+  }
+
+  onKeyPressHandler(event) {
+    const userInput = event.target.value;
+
+    console.log("Inside of onKeyPressHandler...", userInput);
+    console.log("Keypressed: ", event.key);
+
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      console.log("1 What is request code? ", this.state.is_valid_zipcode);
+      this.isValidZipcode(userInput);
+      console.log("2 What is request code? ", this.state.is_valid_zipcode);
+      if (this.state.is_valid_zipcode) {
+        console.log("Is valid zipcode!", true);
+      } else {
+        console.log("Is not valid zipcode!!!", false);
+      }
+    }
   }
 
   render() {
@@ -91,11 +131,8 @@ class NavBar extends Component {
     return (
       <AppBar position="static">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-              <MenuIcon />
-            </IconButton>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              Weather Snapshot
+              <i className="material-icons">wb_sunny</i> Weather Snapshot
             </Typography>
             <div className={classes.grow} />
             <div className={classes.search}>
@@ -106,9 +143,10 @@ class NavBar extends Component {
                 placeholder="Enter Zip code.. "
                 classes={{
                   root: classes.inputRoot,
-                  input: classes.inputInput,
+                  input: classes.inputField,
                 }}
                 onChange={this.onChangeHandler}
+                onKeyPress={this.onKeyPressHandler}
               />
             </div>
             <SettingsDialog />

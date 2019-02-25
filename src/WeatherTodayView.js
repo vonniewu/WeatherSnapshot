@@ -22,7 +22,7 @@ const styles = theme => ({
     fontSize: 40,
   },
   timestamp: {
-    fontSize: 24,
+    fontSize: 16,
   },
   weatherDes: {
     fontSize: 16,
@@ -60,7 +60,7 @@ class TodayView extends Component {
         <CardContent>
           <Typography className={classes.title}>{this.props.data.name}, CA</Typography>
           <Typography className={classes.timestamp}>
-            <i className="material-icons md-18 md-dark md-inactive">access_time</i>
+            <i className="material-icons md-dark md-inactive">access_time</i>
             {convertDtToDate(this.props.data.dt)} ({convertDtToDay(this.props.data.dt)})</Typography>
           <Typography className={classes.weatherDes}>{this.getWeatherDescriptions()}</Typography>
           <Grid container spacing={24}>
