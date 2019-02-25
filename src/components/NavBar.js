@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { OPEN_WEATHER_API_KEY } from './credentials.js';
+import { OPEN_WEATHER_API_KEY } from '../credentials.js';
 
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';

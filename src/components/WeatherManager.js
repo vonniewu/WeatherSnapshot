@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import '../App.css';
 
 import TodayView from './WeatherTodayView.js';
 import WeekView from './WeatherWeekView.js';
 import MonthView from './WeatherMonthView.js';
-import { fetchData } from './UserFunctions.js';
-import { OPEN_WEATHER_API_KEY } from './credentials.js';
+import { fetchData } from '../UserFunctions.js';
+import { OPEN_WEATHER_API_KEY } from '../credentials.js';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';

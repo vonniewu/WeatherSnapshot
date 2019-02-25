@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../App.css';
 
-import { convertDtToDate, convertDtToDay } from './UserFunctions.js';
+import { convertDtToDate, convertDtToDay } from '../UserFunctions.js';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';

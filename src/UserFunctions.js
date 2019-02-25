@@ -3,7 +3,6 @@ const MONTHS = ["January", "February", "March", "April", "May", "June","July", "
 const DATA_FORMAT = ["json","xml","html"];
 const UNITS_FORMAT= ["standard","metric","imperial"];
 
-
 function convertDtToDate(dt_timestamp) {
   var date_obj = new Date(dt_timestamp*1000);
   var month = MONTHS[date_obj.getMonth()];

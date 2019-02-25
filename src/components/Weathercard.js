@@ -13,10 +13,6 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import ShareIcon from '@material-ui/icons/Share';
-
-import { unstable_Box as Box } from '@material-ui/core/Box';
-import { typography } from '@material-ui/system';
 
 
 const styles = theme => ({
@@ -62,7 +58,6 @@ class WeatherCard extends Component {
 
   render() {
     const { classes } = this.props;
-    const temp_symbol = <span className={classes.tempSymbol}>&#8457;</span>;
     return (
       <Card className={classes.card}>
         <CardHeader title={this.props.day} subheader={this.props.date}

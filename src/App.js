@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
-import WeatherManager from './WeatherManager.js';
-import NavBar from './NavBar.js';
+import WeatherManager from './components/WeatherManager.js';
+import NavBar from './components/NavBar.js';
 
 
 class App extends Component {

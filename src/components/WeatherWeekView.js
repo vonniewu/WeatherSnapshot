@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import WeatherCard from './Weathercard.js';
-import { convertDtToDate, convertDtToDay } from './UserFunctions.js';
+import { convertDtToDate, convertDtToDay } from '../UserFunctions.js';
 
 const styles = theme => ({
 
