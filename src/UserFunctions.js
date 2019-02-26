@@ -16,7 +16,22 @@ function convertDtToDay(dt_timestamp) {
   return DAYS[date_obj.getDay()];
 }
 
+function convertDtToTimestamp(dt_timestamp) {
+  var date_obj = new Date(dt_timestamp*1000);
+  var hour = date_obj.getHours();
+
+  if (hour == 0) {
+    return `12 AM`;
+  } else if (hour < 12) {
+    return `${hour} AM`;
+  } else {
+    var newHour = hour - 12;
+    return `${newHour} PM`;
+  }
+}
+
 export {
   convertDtToDate,
   convertDtToDay,
+  convertDtToTimestamp
 }

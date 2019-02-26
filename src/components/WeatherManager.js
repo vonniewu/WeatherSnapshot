@@ -107,7 +107,7 @@ class WeatherManager extends Component {
       console.log("Dark Sky API response: ", response);
       return response;
     })
-    .then(json => this.setState({ darksky_daily: json.daily.data}));
+    .then(json => this.setState({ darksky_daily: json.daily.data.slice(0,7)}));
   }
 
   componentDidMount() {
@@ -142,7 +142,7 @@ class WeatherManager extends Component {
 
     return (
       <div className="container">
-        Check out the Weather Forcast in your location!
+        A minimalist weather website for your needs.
         <div className={classes.buttonGroups}>
           <Button variant="outlined" color="primary" className={classes.button} onClick={() => { this.handleOnClick(1) }}>Today</Button>
           <Button variant="outlined" color="primary" className={classes.button} onClick={() => { this.handleOnClick(2) }}>This week</Button>

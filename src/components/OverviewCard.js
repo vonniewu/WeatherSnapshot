@@ -21,10 +21,9 @@ import yellow from '@material-ui/core/colors/yellow';
 
 const styles = {
   card: {
-    maxWidth: 345,
+    maxWidth: 300,
     width: 225,
-    margin: 20,
-    padding: 10
+    margin: 20
   },
   title: {
     fontWeight: 600
@@ -73,24 +72,54 @@ class OverviewCard extends Component {
     return icon_id.toUpperCase().replace(/[-]/g, '_');
   }
 
+  // <Card className={classes.card}>
+  //   <MuiThemeProvider theme={theme}>
+  //     <CardActionArea>
+  //       <CardContent>
+  //         <Typography align='center' variant='h3' fontWeight={900} color='primary'>{this.props.title}</Typography>
+  //         <Typography gutterBottom align='center' variant='subheading' color='secondary'>{this.props.subtitle}</Typography>
+  //         <Box m={3} />
+  //         <Grid container direction="row" justify="space-around" alignItems="center">
+  //           <Grid item>
+  //             <Typography gutterBottom align='right' variant="h5" color='textPrimary' className={classes.inline}>{this.props.high_temp}</Typography>
+  //             <Typography gutterBottom align='right' variant="h6" color='textSecondary' className={classes.inline}>&#8457;</Typography>
+  //           </Grid>
+  //           <Grid item>
+  //           <Typography gutterBottom align='right' variant="h5" color='textPrimary' className={classes.inline}>{this.props.low_temp}</Typography>
+  //           <Typography gutterBottom align='right' variant="h6" color='textSecondary' className={classes.inline}>&#8457;</Typography>
+  //           </Grid>
+  //         </Grid>
+  //         <div className={classes.icon}>
+  //           <Skycons
+  //           color='primary'
+  //           icon={this.getIcon(this.props.icon_name)}
+  //           autoplay={true} />
+  //         </div>
+  //         <Typography gutterBottom component="p">
+  //           {this.props.weather_des}
+  //         </Typography>
+  //       </CardContent>
+  //     </CardActionArea>
+  //   </MuiThemeProvider>
+  // </Card>
+
   render() {
     const { classes } = this.props;
     return (
       <Card className={classes.card}>
         <MuiThemeProvider theme={theme}>
-          <CardActionArea>
             <CardContent>
               <Typography align='center' variant='h3' fontWeight={900} color='primary'>{this.props.title}</Typography>
-              <Typography gutterBottom align='center' variant='h10' color='secondary'>{this.props.subtitle}</Typography>
+              <Typography gutterBottom align='center' variant='subheading' color='secondary'>{this.props.subtitle}</Typography>
               <Box m={3} />
               <Grid container direction="row" justify="space-around" alignItems="center">
                 <Grid item>
                   <Typography gutterBottom align='right' variant="h5" color='textPrimary' className={classes.inline}>{this.props.high_temp}</Typography>
-                  <Typography gutterBottom align='right' variant="h8" color='textSecondary' className={classes.inline}>&#8457;</Typography>
+                  <Typography gutterBottom align='right' variant="h6" color='textSecondary' className={classes.inline}>&#8457;</Typography>
                 </Grid>
                 <Grid item>
                 <Typography gutterBottom align='right' variant="h5" color='textPrimary' className={classes.inline}>{this.props.low_temp}</Typography>
-                <Typography gutterBottom align='right' variant="h8" color='textSecondary' className={classes.inline}>&#8457;</Typography>
+                <Typography gutterBottom align='right' variant="h6" color='textSecondary' className={classes.inline}>&#8457;</Typography>
                 </Grid>
               </Grid>
               <div className={classes.icon}>
@@ -103,7 +132,6 @@ class OverviewCard extends Component {
                 {this.props.weather_des}
               </Typography>
             </CardContent>
-          </CardActionArea>
         </MuiThemeProvider>
       </Card>
     );
