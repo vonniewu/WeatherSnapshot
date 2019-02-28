@@ -1,5 +1,5 @@
 .App {
-
+  background-color: #deeaf2;
 }
 
 .App-logo {
@@ -28,8 +28,7 @@ body {
 
 .weather_container {
   margin: auto;
-  width: 100%;
-  padding: 5px;
+  width: 80%;
 }
 
 .weathercard {
@@ -43,6 +42,7 @@ body {
 }
 
 .weathercards-container {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   padding: 20;

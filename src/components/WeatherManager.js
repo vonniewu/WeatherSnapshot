@@ -114,7 +114,7 @@ class WeatherManager extends Component {
       console.log("Dark Sky API response: ", response);
       return response;
     })
-    .then(json => this.setState({ darksky_daily: json.daily.data.slice(0,7)}));
+    .then(json => this.setState({ darksky_daily: json.daily.data.slice(1,8)}));
   }
 
   componentDidMount() {

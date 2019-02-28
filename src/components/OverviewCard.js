@@ -26,8 +26,7 @@ import { formatDtDay, formatDtDate, formatTemperature } from '../utils.js';
 const styles = {
   card: {
     maxWidth: 300,
-    width: 200,
-    margin: 15
+    width: 180,
   },
   title: {
     fontWeight: 600
@@ -59,10 +58,10 @@ const theme = createMuiTheme({
       main: '#757575'
     },
     primary: {
-      main: '#0d47a1'
+      main: '#404e5b'
     },
     secondary: {
-      main: '#f4af0c'
+      main: '#B3BCB7'
     }
   }
 });
@@ -82,25 +81,26 @@ class OverviewCard extends Component {
       <Card className={classes.card}>
         <MuiThemeProvider theme={theme}>
             <CardContent>
-              <Typography align='center' variant='h3' fontWeight={900}>{formatDtDay(this.props.dt)}</Typography>
-              <Typography gutterBottom align='center' variant='subheading'>{formatDtDate(this.props.dt)}</Typography>
+              <Typography align='center' variant='h4' color='primary' fontWeight={900}>{formatDtDay(this.props.dt)}</Typography>
+              <Typography gutterBottom align='center' color='secondary' variant='subheading'>{formatDtDate(this.props.dt)}</Typography>
+              <Box m={3} />
+              <div className={classes.icon}>
+                <Skycons
+                color='#2d5982'
+                icon={this.getIcon(this.props.icon_name)}
+                autoplay={true} />
+              </div>
               <Box m={3} />
               <Grid container direction="row" justify="space-around" alignItems="center">
                 <Grid item>
                   <Typography gutterBottom align='right' variant="h4" color='primary' className={classes.inline}>{formatTemperature(this.props.high_temp)}</Typography>
-                  <Typography gutterBottom align='right' variant="h6" className={classes.inline}>&#8457;</Typography>
+                  <Typography gutterBottom align='right' variant="h6" color='primary' className={classes.inline}>&#8457;</Typography>
                 </Grid>
                 <Grid item>
                   <Typography gutterBottom align='right' variant="h4" color='secondary' className={classes.inline}>{formatTemperature(this.props.low_temp)}</Typography>
-                  <Typography gutterBottom align='right' variant="h6" className={classes.inline}>&#8457;</Typography>
+                  <Typography gutterBottom align='right' variant="h6" color='secondary' className={classes.inline}>&#8457;</Typography>
                 </Grid>
               </Grid>
-              <div className={classes.icon}>
-                <Skycons
-                color='primary'
-                icon={this.getIcon(this.props.icon_name)}
-                autoplay={true} />
-              </div>
             </CardContent>
         </MuiThemeProvider>
       </Card>

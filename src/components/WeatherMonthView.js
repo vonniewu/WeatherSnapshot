@@ -2,19 +2,24 @@ import React, { Component } from 'react';
 
 import OverviewCard from './OverviewCard.js';
 import DetailedCard from './DetailedCard.js';
+
 import ButtonBase from '@material-ui/core/ButtonBase';
+import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { unstable_Box as Box } from '@material-ui/core/Box';
 
 const styles = {
+  OverviewCard_container: {
+    width: '100%'
+  },
   banner: {
     width: '100%',
-    height: 50,
-    backgroundColor: '#364150',
-    fontSize: 32,
-    color: '#fce4ec ',
-    textAlign: 'center'
+    color: '#404e5b',
+    textAlign: 'left',
+    padding: 10
   },
 };
 
@@ -35,8 +40,9 @@ class MonthView extends Component {
 
   displayDetailedCard() {
     const selectedData = this.props.data[this.state.selectedCard];
-    console.log("selectedData: ", selectedData);
-    return <DetailedCard
+    const { classes } = this.props;
+    return (
+      <DetailedCard
       key={this.state.selectedCard}
       sunriseTime={selectedData.sunriseTime}
       sunsetTime={selectedData.sunsetTime}
@@ -50,7 +56,7 @@ class MonthView extends Component {
       cloudCover={selectedData.cloudCover}
       uvIndex={selectedData.uvIndex}
       ozone={selectedData.ozone}
-      visibility={selectedData.visibility} />;
+      visibility={selectedData.visibility} />);
   }
 
   render() {
@@ -58,10 +64,17 @@ class MonthView extends Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-      <div className={classes.banner}>
-      Weather at a glance
-      </div>
-      <div className="weathercards-container">{this.props.data.map((obj, index) =>
+      <Card className={classes.banner}>
+        <Typography variant="h6">Weather Forcast for the next 7 days</Typography>
+      </Card>
+      <Box m={1} />
+        <Grid container
+        direction="row"
+        justify="space-between"
+        alignItems="center"
+        className={classes.OverviewCard_container}
+        >{this.props.data.map((obj, index) =>
+          <Grid item>
           <ButtonBase
             focusRipple
             key={index}
@@ -74,9 +87,11 @@ class MonthView extends Component {
               high_temp={obj.temperatureHigh}
               icon_name={obj.icon}
               weather_des={obj.summary}/>
-        </ButtonBase>)}
-      </div>
-      <div className="weatherDes">{this.displayDetailedCard()}</div>
+            </ButtonBase>
+          </Grid>)}
+          </Grid>
+      <Box m={1} />
+      <div>{this.displayDetailedCard()}</div>
       </React.Fragment>
     );
   }
