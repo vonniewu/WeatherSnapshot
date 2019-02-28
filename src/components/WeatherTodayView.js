@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 
-import { convertDtToDate, convertDtToDay } from '../UserFunctions.js';
+import { formatDtDate, formatDtDay } from '../utils.js';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -61,7 +61,7 @@ class TodayView extends Component {
           <Typography className={classes.title}>{this.props.data.name}, CA</Typography>
           <Typography className={classes.timestamp}>
             <i className="material-icons md-dark md-inactive">access_time</i>
-            {convertDtToDate(this.props.data.dt)} ({convertDtToDay(this.props.data.dt)})</Typography>
+            {formatDtDate(this.props.data.dt)} ({formatDtDay(this.props.data.dt)})</Typography>
           <Typography className={classes.weatherDes}>{this.getWeatherDescriptions()}</Typography>
           <Grid container spacing={24}>
             <Grid item xs={6}>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import WeatherCard from './Weathercard.js';
-import { convertDtToDate, convertDtToDay } from '../UserFunctions.js';
+import { formatDtDate, formatDtDay } from '../utils.js';
 
 const styles = theme => ({
 
@@ -17,8 +17,8 @@ class WeekView extends Component {
       <div className="weathercards-container">{this.props.data.map((obj,index) =>
         <WeatherCard
         key={index}
-        day={convertDtToDay(obj.dt)}
-        date={convertDtToDate(obj.dt)}
+        day={formatDtDay(obj.dt)}
+        date={formatDtDate(obj.dt)}
         low_temp={obj.temp.min}
         high_temp={obj.temp.max}
         morning_temp={obj.temp.day}

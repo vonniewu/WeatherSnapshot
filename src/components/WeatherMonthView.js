@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import { convertDtToDate, convertDtToDay, convertDtToTimestamp } from '../UserFunctions.js';
 import OverviewCard from './OverviewCard.js';
 import DetailedCard from './DetailedCard.js';
 import ButtonBase from '@material-ui/core/ButtonBase';
@@ -39,8 +38,8 @@ class MonthView extends Component {
     console.log("selectedData: ", selectedData);
     return <DetailedCard
       key={this.state.selectedCard}
-      sunriseTime={convertDtToTimestamp(selectedData.sunriseTime)}
-      sunsetTime={convertDtToTimestamp(selectedData.sunsetTime)}
+      sunriseTime={selectedData.sunriseTime}
+      sunsetTime={selectedData.sunsetTime}
       moonPhase={selectedData.moonPhase}
       dewPoint={selectedData.dewPoint}
       humidity={selectedData.humidity}
@@ -70,8 +69,7 @@ class MonthView extends Component {
             onClick={() => this.selectDetailedCard(index)}>
             <OverviewCard
               key={index}
-              title={convertDtToDay(obj.time)}
-              subtitle={convertDtToDate(obj.time)}
+              dt={obj.time}
               low_temp={obj.temperatureLow}
               high_temp={obj.temperatureHigh}
               icon_name={obj.icon}

@@ -12,6 +12,11 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+// Import utils UserFunctions
+import { formatDtTime, formatTemperature, formatMoonPhase, formatDewPoint,
+  formatPrecipitation, formatHumidity, formatPressure, formatWindSpeed,
+  formatCloud, formatUVIndex, formatVisibliity, formatOzone } from '../utils.js';
+
 const styles = theme => ({
   paper: {
     padding: theme.spacing.unit * 4,
@@ -32,6 +37,7 @@ class DetailedCard extends Component {
 
   render() {
     const { classes } = this.props;
+
     return (
       <Paper className={classes.paper}>
         <Grid
@@ -42,33 +48,33 @@ class DetailedCard extends Component {
         spacing={8}>
           <Grid item>
             <Typography gutterBottom variant="body1" className={classes.titleLabel}>Sunrise Time</Typography>
-            <Typography variant="h4">{this.props.sunriseTime}</Typography>
+            <Typography variant="h4">{formatDtTime(this.props.sunriseTime)}</Typography>
             <Typography gutterBottom variant="body1" className={classes.titleLabel}>Sunset Time</Typography>
-            <Typography variant="h4">{this.props.sunsetTime}</Typography>
+            <Typography variant="h4">{formatDtTime(this.props.sunsetTime)}</Typography>
             <Typography gutterBottom variant="body1" className={classes.titleLabel}>Moon Phase</Typography>
-            <Typography variant="h4">{this.props.moonPhase}</Typography>
+            <Typography variant="h4">{formatMoonPhase(this.props.moonPhase)}</Typography>
             <Typography gutterBottom variant="body1" className={classes.titleLabel}>Dew Point</Typography>
-            <Typography variant="h4">{this.props.dewPoint}</Typography>
+            <Typography variant="h4">{formatDewPoint(this.props.dewPoint)}</Typography>
           </Grid>
           <Grid item>
             <Typography gutterBottom variant="body1" className={classes.titleLabel}>Humidity</Typography>
-            <Typography variant="h4">{Math.round(this.props.humidity*100)}%</Typography>
+            <Typography variant="h4">{formatHumidity(this.props.humidity)}</Typography>
             <Typography gutterBottom variant="body1" className={classes.titleLabel}>Preciptation</Typography>
-            <Typography variant="h4">{Math.round(this.props.preciptation*100)}%</Typography>
+            <Typography variant="h4">{formatPrecipitation(this.props.preciptation)}</Typography>
             <Typography gutterBottom variant="body1" className={classes.titleLabel}>Pressure</Typography>
-            <Typography variant="h4">{this.props.pressure}</Typography>
+            <Typography variant="h4">{formatPressure(this.props.pressure)}</Typography>
             <Typography gutterBottom variant="body1" className={classes.titleLabel}>Wind Speed</Typography>
-            <Typography variant="h4">{this.props.windSpeed}</Typography>
+            <Typography variant="h4">{formatWindSpeed(this.props.windSpeed)}</Typography>
           </Grid>
           <Grid item>
             <Typography gutterBottom variant="body1">Cloud</Typography>
-            <Typography variant="h4">{this.props.cloudCover}</Typography>
+            <Typography variant="h4">{formatCloud(this.props.cloudCover)}</Typography>
             <Typography gutterBottom variant="body1">UV Index</Typography>
-            <Typography variant="h4">{this.props.uvIndex}</Typography>
+            <Typography variant="h4">{formatUVIndex(this.props.uvIndex)}</Typography>
             <Typography gutterBottom variant="body1">Visibility</Typography>
-            <Typography variant="h4">{this.props.visibility}</Typography>
+            <Typography variant="h4">{formatVisibliity(this.props.visibility)}</Typography>
             <Typography gutterBottom variant="body1">Ozone</Typography>
-            <Typography variant="h4">{this.props.ozone}</Typography>
+            <Typography variant="h4">{formatOzone(this.props.ozone)}</Typography>
           </Grid>
         </Grid>
       </Paper>

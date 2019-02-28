@@ -5,7 +5,7 @@ import '../App.css';
 import TodayView from './WeatherTodayView.js';
 import WeekView from './WeatherWeekView.js';
 import MonthView from './WeatherMonthView.js';
-import { fetchData } from '../UserFunctions.js';
+import { fetchData } from '../utils.js';
 import { OPEN_WEATHER_API_KEY, DARK_SKY_API_KEY } from '../credentials.js';
 
 import PropTypes from 'prop-types';

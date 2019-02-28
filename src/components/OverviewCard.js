@@ -19,6 +19,10 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import yellow from '@material-ui/core/colors/yellow';
 
+// Import global configurations
+import { temperatureUnit } from '../configs.js';
+import { formatDtDay, formatDtDate, formatTemperature } from '../utils.js';
+
 const styles = {
   card: {
     maxWidth: 300,
@@ -78,16 +82,16 @@ class OverviewCard extends Component {
       <Card className={classes.card}>
         <MuiThemeProvider theme={theme}>
             <CardContent>
-              <Typography align='center' variant='h3' fontWeight={900}>{this.props.title}</Typography>
-              <Typography gutterBottom align='center' variant='subheading'>{this.props.subtitle}</Typography>
+              <Typography align='center' variant='h3' fontWeight={900}>{formatDtDay(this.props.dt)}</Typography>
+              <Typography gutterBottom align='center' variant='subheading'>{formatDtDate(this.props.dt)}</Typography>
               <Box m={3} />
               <Grid container direction="row" justify="space-around" alignItems="center">
                 <Grid item>
-                  <Typography gutterBottom align='right' variant="h4" color='primary' className={classes.inline}>{Math.round(this.props.high_temp)}</Typography>
+                  <Typography gutterBottom align='right' variant="h4" color='primary' className={classes.inline}>{formatTemperature(this.props.high_temp)}</Typography>
                   <Typography gutterBottom align='right' variant="h6" className={classes.inline}>&#8457;</Typography>
                 </Grid>
                 <Grid item>
-                  <Typography gutterBottom align='right' variant="h4" color='secondary' className={classes.inline}>{Math.round(this.props.low_temp)}</Typography>
+                  <Typography gutterBottom align='right' variant="h4" color='secondary' className={classes.inline}>{formatTemperature(this.props.low_temp)}</Typography>
                   <Typography gutterBottom align='right' variant="h6" className={classes.inline}>&#8457;</Typography>
                 </Grid>
               </Grid>
