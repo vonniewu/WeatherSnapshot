@@ -10,12 +10,18 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 
 // Import utils UserFunctions
 import { formatDtTime, formatTemperature, formatMoonPhase, formatDewPoint,
   formatPrecipitation, formatHumidity, formatPressure, formatWindSpeed,
   formatCloud, formatUVIndex, formatVisibliity, formatOzone } from '../utils.js';
+
+// Import tooltip information
+import {sunriseTimeInfo, sunsetTimeInfo, moonPhaseInfo, dewPointInfo,
+  humidityInfo, precipProbabilityInfo, pressureInfo, windSpeedInfo,
+  cloudInfo, uvIndexInfo, visibilityInfo, ozoneInfo} from '../tooltipsInfo.js';
 
 const styles = theme => ({
   paper: {
@@ -47,33 +53,57 @@ class DetailedCard extends Component {
         alignItems="center"
         spacing={8}>
           <Grid item>
-            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Sunrise Time</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={sunriseTimeInfo} placement="right">
+              <Typography gutterBottom variant="body1" className={classes.titleLabel}>Sunrise Time</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatDtTime(this.props.sunriseTime)}</Typography>
-            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Sunset Time</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={sunsetTimeInfo} placement="right">
+              <Typography gutterBottom variant="body1" className={classes.titleLabel}>Sunset Time</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatDtTime(this.props.sunsetTime)}</Typography>
-            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Moon Phase</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={moonPhaseInfo} placement="right">
+              <Typography gutterBottom variant="body1" className={classes.titleLabel}>Moon Phase</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatMoonPhase(this.props.moonPhase)}</Typography>
-            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Dew Point</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={dewPointInfo} placement="right">
+              <Typography gutterBottom variant="body1" className={classes.titleLabel}>Dew Point</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatDewPoint(this.props.dewPoint)}</Typography>
           </Grid>
           <Grid item>
-            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Humidity</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={humidityInfo} placement="right">
+              <Typography gutterBottom variant="body1" className={classes.titleLabel}>Humidity</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatHumidity(this.props.humidity)}</Typography>
-            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Preciptation</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={precipProbabilityInfo} placement="right">
+              <Typography gutterBottom variant="body1" className={classes.titleLabel}>Preciptation</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatPrecipitation(this.props.preciptation)}</Typography>
-            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Pressure</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={pressureInfo} placement="right">
+              <Typography gutterBottom variant="body1" className={classes.titleLabel}>Pressure</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatPressure(this.props.pressure)}</Typography>
-            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Wind Speed</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={windSpeedInfo} placement="right">
+              <Typography gutterBottom variant="body1" className={classes.titleLabel}>Wind Speed</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatWindSpeed(this.props.windSpeed)}</Typography>
           </Grid>
           <Grid item>
-            <Typography gutterBottom variant="body1">Cloud</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={cloudInfo} placement="right">
+              <Typography gutterBottom variant="body1">Cloud</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatCloud(this.props.cloudCover)}</Typography>
-            <Typography gutterBottom variant="body1">UV Index</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={uvIndexInfo} placement="right">
+              <Typography gutterBottom variant="body1">UV Index</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatUVIndex(this.props.uvIndex)}</Typography>
-            <Typography gutterBottom variant="body1">Visibility</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={visibilityInfo} placement="right">
+              <Typography gutterBottom variant="body1">Visibility</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatVisibliity(this.props.visibility)}</Typography>
-            <Typography gutterBottom variant="body1">Ozone</Typography>
+            <Tooltip disableFocusListener disableTouchListener title={ozoneInfo} placement="right">
+              <Typography gutterBottom variant="body1">Ozone</Typography>
+            </Tooltip>
             <Typography variant="h4">{formatOzone(this.props.ozone)}</Typography>
           </Grid>
         </Grid>
