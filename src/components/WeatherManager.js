@@ -13,6 +13,13 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
+  wm_container: {
+    width: '100%',
+    paddingRight: '15px',
+    paddingLeft: '15px',
+    marginRight: 'auto',
+    marginLeft: 'auto',
+  },
   button: {
     margin: theme.spacing.unit,
   },
@@ -141,7 +148,7 @@ class WeatherManager extends Component {
     const { classes } = this.props;
 
     return (
-      <div className="container">
+      <div className="weather_container">
         A minimalist weather website for your needs.
         <div className={classes.buttonGroups}>
           <Button variant="outlined" color="primary" className={classes.button} onClick={() => { this.handleOnClick(1) }}>Today</Button>

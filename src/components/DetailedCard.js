@@ -12,9 +12,17 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-const styles = {
-
-};
+const styles = theme => ({
+  paper: {
+    padding: theme.spacing.unit * 4,
+    marginTop: 50,
+    marginBottom: 50,
+    width: '100%'
+  },
+  titleLabel: {
+    fontColor: '#64b5f6'
+  }
+});
 
 class DetailedCard extends Component {
 
@@ -31,29 +39,45 @@ class DetailedCard extends Component {
         direction="row"
         justify="space-evenly"
         alignItems="center"
-        spacing={32}>
-          <Grid item xs={4}>
-            <Typography varient="h3">Sunrise Time: {this.props.sunriseTime}</Typography>
-            <Typography varient="h3">Sunset Time: {this.props.sunsetTime}</Typography>
-            <Typography varient="h3">Moon Phase: {this.props.moonPhase}</Typography>
+        spacing={8}>
+          <Grid item>
+            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Sunrise Time</Typography>
+            <Typography variant="h4">{this.props.sunriseTime}</Typography>
+            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Sunset Time</Typography>
+            <Typography variant="h4">{this.props.sunsetTime}</Typography>
+            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Moon Phase</Typography>
+            <Typography variant="h4">{this.props.moonPhase}</Typography>
+            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Dew Point</Typography>
+            <Typography variant="h4">{this.props.dewPoint}</Typography>
           </Grid>
-          <Grid item xs={4}>
-            <Typography varient="h3">Humidity: {this.props.humidity}</Typography>
-            <Typography varient="h3">Preciptation: {this.props.preciptation}</Typography>
-            <Typography varient="h3">Pressure: {this.props.pressure}</Typography>
-            <Typography varient="h3">Wind Speed: {this.props.windSpeed}</Typography>
-            <Typography varient="h3">Wind Gust: {this.props.windGust}</Typography>
+          <Grid item>
+            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Humidity</Typography>
+            <Typography variant="h4">{Math.round(this.props.humidity*100)}%</Typography>
+            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Preciptation</Typography>
+            <Typography variant="h4">{Math.round(this.props.preciptation*100)}%</Typography>
+            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Pressure</Typography>
+            <Typography variant="h4">{this.props.pressure}</Typography>
+            <Typography gutterBottom variant="body1" className={classes.titleLabel}>Wind Speed</Typography>
+            <Typography variant="h4">{this.props.windSpeed}</Typography>
           </Grid>
-          <Grid item xs={4}>
-            <Typography varient="h3">Cloud Cover: {this.props.cloudCover}</Typography>
-            <Typography varient="h3">UVIndex: {this.props.uvIndex}</Typography>
-            <Typography varient="h3">Visibility: {this.props.visibility}</Typography>
-            <Typography varient="h3">Ozone: {this.props.ozone}</Typography>
+          <Grid item>
+            <Typography gutterBottom variant="body1">Cloud</Typography>
+            <Typography variant="h4">{this.props.cloudCover}</Typography>
+            <Typography gutterBottom variant="body1">UV Index</Typography>
+            <Typography variant="h4">{this.props.uvIndex}</Typography>
+            <Typography gutterBottom variant="body1">Visibility</Typography>
+            <Typography variant="h4">{this.props.visibility}</Typography>
+            <Typography gutterBottom variant="body1">Ozone</Typography>
+            <Typography variant="h4">{this.props.ozone}</Typography>
           </Grid>
         </Grid>
       </Paper>
     );
   }
 }
+
+DetailedCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(DetailedCard);

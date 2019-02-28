@@ -6,10 +6,17 @@ import DetailedCard from './DetailedCard.js';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { unstable_Box as Box } from '@material-ui/core/Box';
 
 const styles = {
-  clickable: {
-  }
+  banner: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#364150',
+    fontSize: 32,
+    color: '#fce4ec ',
+    textAlign: 'center'
+  },
 };
 
 class MonthView extends Component {
@@ -35,6 +42,7 @@ class MonthView extends Component {
       sunriseTime={convertDtToTimestamp(selectedData.sunriseTime)}
       sunsetTime={convertDtToTimestamp(selectedData.sunsetTime)}
       moonPhase={selectedData.moonPhase}
+      dewPoint={selectedData.dewPoint}
       humidity={selectedData.humidity}
       preciptation={selectedData.precipProbability}
       pressure={selectedData.pressure}
@@ -51,11 +59,14 @@ class MonthView extends Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
+      <div className={classes.banner}>
+      Weather at a glance
+      </div>
       <div className="weathercards-container">{this.props.data.map((obj, index) =>
           <ButtonBase
+            focusRipple
             key={index}
             component="button"
-            className={classes.clickable}
             onClick={() => this.selectDetailedCard(index)}>
             <OverviewCard
               key={index}
