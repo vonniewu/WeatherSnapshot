@@ -6,13 +6,16 @@ import TodayView from './WeatherTodayView.js';
 import WeekView from './WeatherWeekView.js';
 import MonthView from './WeatherMonthView.js';
 import { fetchData } from '../utils.js';
-import { OPEN_WEATHER_API_KEY, DARK_SKY_API_KEY } from '../credentials.js';
+import { OPEN_WEATHER_API_KEY, DARK_SKY_API_KEY, DARK_SKY_PROXY } from '../credentials.js';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
+  todayView: {
+    width: '100%',
+  },
   wm_container: {
     width: '100%',
     paddingRight: '15px',
@@ -28,9 +31,11 @@ const styles = theme => ({
   },
   buttonGroups: {
     height: 100
+  },
+  spacing: {
+    height: 50
   }
 });
-
 
 class WeatherManager extends Component {
 
@@ -43,11 +48,14 @@ class WeatherManager extends Component {
       weekly_data: {},
       latitude: '',
       longitude: '',
-      darksky_daily: []
+      darkSkyToday: [],
+      darksky_daily: [],
+      darkSkyNext7Days: [],
+      darkSkyHourly: []
     };
     this.fetchCurrentWeatherData = this.fetchCurrentWeatherData.bind(this);
     this.fetchWeekWeatherData = this.fetchWeekWeatherData.bind(this);
-    this.fetchWeeklyDetailedData = this.fetchWeeklyDetailedData.bind(this);
+    this._fetchDarkSkyWeatherForcast = this._fetchDarkSkyWeatherForcast.bind(this);
   }
 
   fetchCurrentWeatherData(zipcode,format,unit) {
@@ -65,7 +73,6 @@ class WeatherManager extends Component {
     })
     .then(response => response.json())
     .then(response => {
-      console.log("fetchCurrentWeatherData.. Success: ", JSON.stringify(response));
       this.setState({
         latitude: response.coord.lat,
         longitude: response.coord.lon
@@ -96,12 +103,8 @@ class WeatherManager extends Component {
     console.log("fetchWeekWeatherData.. daily_data: ", this.state.daily_data);
   }
 
-  fetchWeeklyDetailedData() {
-    const proxy = 'https://cors-anywhere.herokuapp.com/';
-    // const API_CALL = proxy + `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/${this.state.latitude},${this.state.longitude}`;
-    const API_CALL = proxy + `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/33.69,-117.83`;
-
-    console.log("API CALL: ", API_CALL);
+  _fetchDarkSkyWeatherForcast(latitude, longitude) {
+    const API_CALL = `${DARK_SKY_PROXY}https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/${latitude},${longitude}`;
 
     fetch(API_CALL).then(function(response) {
       if (response.ok) {
@@ -110,38 +113,21 @@ class WeatherManager extends Component {
       throw Error(response.statusText);
     })
     .then(response => response.json())
-    .then(response => {
-      console.log("Dark Sky API response: ", response);
-      return response;
-    })
-    .then(json => this.setState({ darksky_daily: json.daily.data.slice(1,8)}));
+    .then(json => this.setState({
+      darkSkyToday: json.daily.data.slice(0, 1),
+      darkSkyNext7Days: json.daily.data.slice(1,8),
+      darkSkyHourly: json.hourly.data,
+    }));
+
+    console.log("DARKSKY DATA: ", this.state);
   }
 
   componentDidMount() {
     this.fetchWeekWeatherData('92604','json','imperial');
-    this.fetchCurrentWeatherData('92604','json','imperial');
-    this.fetchWeeklyDetailedData();
-  }
 
-  displaySelectedView(selected) {
-    let selectedView;
-
-    console.log("displaySelectedView...", this.state);
-
-    if (selected === 1) {
-      selectedView = <TodayView data={this.state.daily_data} />;
-    } else if (selected === 2) {
-      selectedView = <WeekView data={this.state.temp_data} />;
-    } else if (selected === 3) {
-      selectedView = <MonthView data={this.state.darksky_daily} />;
-    }
-    return selectedView;
-  }
-
-  handleOnClick(value) {
-    this.setState({
-      selected_view: value
-    });
+    const latitude = '33.69';
+    const longitude = '-117.83';
+    this._fetchDarkSkyWeatherForcast(latitude, longitude);
   }
 
   render() {
@@ -149,14 +135,13 @@ class WeatherManager extends Component {
 
     return (
       <div className="weather_container">
-        A minimalist weather website for your needs.
-        <div className={classes.buttonGroups}>
-          <Button variant="outlined" color="primary" className={classes.button} onClick={() => { this.handleOnClick(1) }}>Today</Button>
-          <Button variant="outlined" color="primary" className={classes.button} onClick={() => { this.handleOnClick(2) }}>This week</Button>
-          <Button variant="outlined" color="primary" className={classes.button} onClick={() => { this.handleOnClick(3) }}>This month</Button>
+        <div className={classes.spacing} />
+        <div className={classes.todayView}>
+          <TodayView data={this.state.darkSkyToday} graphdata={this.state.darkSkyHourly} />
         </div>
+        <div className={classes.spacing} />
         <div>
-        {this.displaySelectedView(this.state.selected_view)}
+          <MonthView data={this.state.darkSkyNext7Days} />
         </div>
       </div>
 

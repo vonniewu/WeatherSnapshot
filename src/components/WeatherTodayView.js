@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 
-import { formatDtDate, formatDtDay } from '../utils.js';
+import { formatDtDate, formatDtDay, formatTemperature } from '../utils.js';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,41 +12,24 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
-    maxWidth: 500,
+    maxWidth: '100%',
     backgroundColor: theme.palette.background.paper,
   },
   card: {
-    mindWidth: 300,
+    minWidth: 300,
   },
-  title: {
-    fontSize: 40,
+  inline: {
+    display: 'inline-block'
   },
-  timestamp: {
-    fontSize: 16,
-  },
-  weatherDes: {
-    fontSize: 16,
-  },
-  info: {
-    fontSize: 14,
-  },
-  chip: {
-    marginRight: theme.spacing.unit,
-  },
+  spacing: {
+    height: 20
+  }
 });
 
 class TodayView extends Component {
 
   constructor(props) {
     super(props);
-    this.getWeatherDescriptions = this.getWeatherDescriptions.bind(this);
-  }
-
-  getWeatherDescriptions() {
-    if (this.props.data.weather) {
-      const weatherDes = this.props.data.weather[0].description;
-      return weatherDes.charAt(0).toUpperCase() + weatherDes.slice(1);
-    }
   }
 
   render() {
@@ -56,31 +39,26 @@ class TodayView extends Component {
 
     return (
       <div className={classes.root}>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography className={classes.title}>{this.props.data.name}, CA</Typography>
-          <Typography className={classes.timestamp}>
-            <i className="material-icons md-dark md-inactive">access_time</i>
-            {formatDtDate(this.props.data.dt)} ({formatDtDay(this.props.data.dt)})</Typography>
-          <Typography className={classes.weatherDes}>{this.getWeatherDescriptions()}</Typography>
-          <Grid container spacing={24}>
-            <Grid item xs={6}>
-              <Typography gutterBottom className={classes.info}>Min Temp: {this.props.data && this.props.data.main ? this.props.data.main.temp_min: null}&#8457;</Typography>
-              <Typography gutterBottom className={classes.info}>High Temp: {this.props.data && this.props.data.main ? this.props.data.main.temp_min: null}&#8457;</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <div>
-                <Typography gutterBottom className={classes.info}>Humidity: {this.props.data && this.props.data.main ? this.props.data.main.humidity: null}%</Typography>
-                <Typography gutterBottom className={classes.info}>Wind: {this.props.data && this.props.data.wind ? this.props.data.wind.speed: null} mph</Typography>
-                <Typography gutterBottom className={classes.info}>Pressure: {this.props.data && this.props.data.main ? this.props.data.main.pressure: null} hPa</Typography>
-              </div>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+      {this.props.data.map((obj, index) => (
+        <Card className={classes.card}>
+            <CardContent>
+              <Typography variant="h3" className={classes.title}>Irvine, CA</Typography>
+              <Typography variant="subtitle2" className={classes.timestamp}>Today, {formatDtDate(obj.time)} ({formatDtDay(obj.time)})</Typography>
+              <Grid container direction="row" justify="space-around" alignItems="center">
+                <Grid item>
+                  <Typography gutterBottom align='right' variant="h4" className={classes.inline}>{formatTemperature(obj.temperatureMax)}</Typography>
+                  <Typography gutterBottom align='right' variant="h6" className={classes.inline}>&#8457;</Typography>
+                </Grid>
+                <Grid item>
+                  <Typography gutterBottom align='right' variant="h4" className={classes.inline}>{formatTemperature(obj.temperatureMin)}</Typography>
+                  <Typography gutterBottom align='right' variant="h6" className={classes.inline}>&#8457;</Typography>
+                </Grid>
+              </Grid>
+              <Typography variant="h4" className={classes.weatherDes}>{obj.summary}</Typography>
+            </CardContent>
+          </Card>
+        ))}
       </div>
-
-
     );
   }
 }

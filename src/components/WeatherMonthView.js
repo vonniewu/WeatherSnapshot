@@ -11,6 +11,28 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { unstable_Box as Box } from '@material-ui/core/Box';
 
+
+// displayDetailedCard() {
+//   const selectedData = this.props.data[this.state.selectedCard];
+//   const { classes } = this.props;
+//   return (
+//     <DetailedCard
+//     key={this.state.selectedCard}
+//     sunriseTime={selectedData.sunriseTime}
+//     sunsetTime={selectedData.sunsetTime}
+//     moonPhase={selectedData.moonPhase}
+//     dewPoint={selectedData.dewPoint}
+//     humidity={selectedData.humidity}
+//     preciptation={selectedData.precipProbability}
+//     pressure={selectedData.pressure}
+//     windSpeed={selectedData.windSpeed}
+//     windGust={selectedData.windGust}
+//     cloudCover={selectedData.cloudCover}
+//     uvIndex={selectedData.uvIndex}
+//     ozone={selectedData.ozone}
+//     visibility={selectedData.visibility} />);
+// }
+
 const styles = {
   OverviewCard_container: {
     width: '100%'
@@ -22,7 +44,7 @@ const styles = {
     padding: 10
   },
   spacing: {
-    height: 10
+    height: 15
   }
 };
 
@@ -31,35 +53,14 @@ class MonthView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedCard: 0
+      selectedCard: 0,
     };
     this.selectDetailedCard = this.selectDetailedCard.bind(this);
-    this.displayDetailedCard = this.displayDetailedCard.bind(this);
+    // this.displayDetailedCard = this.displayDetailedCard.bind(this);
   }
 
   selectDetailedCard(value) {
     this.setState({ selectedCard: value});
-  }
-
-  displayDetailedCard() {
-    const selectedData = this.props.data[this.state.selectedCard];
-    const { classes } = this.props;
-    return (
-      <DetailedCard
-      key={this.state.selectedCard}
-      sunriseTime={selectedData.sunriseTime}
-      sunsetTime={selectedData.sunsetTime}
-      moonPhase={selectedData.moonPhase}
-      dewPoint={selectedData.dewPoint}
-      humidity={selectedData.humidity}
-      preciptation={selectedData.precipProbability}
-      pressure={selectedData.pressure}
-      windSpeed={selectedData.windSpeed}
-      windGust={selectedData.windGust}
-      cloudCover={selectedData.cloudCover}
-      uvIndex={selectedData.uvIndex}
-      ozone={selectedData.ozone}
-      visibility={selectedData.visibility} />);
   }
 
   render() {
@@ -92,9 +93,8 @@ class MonthView extends Component {
               weather_des={obj.summary}/>
             </ButtonBase>
           </Grid>)}
-          </Grid>
+        </Grid>
       <div className={classes.spacing}></div>
-      <div>{this.displayDetailedCard()}</div>
       </React.Fragment>
     );
   }
