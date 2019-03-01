@@ -21,6 +21,9 @@ const styles = {
     textAlign: 'left',
     padding: 10
   },
+  spacing: {
+    height: 10
+  }
 };
 
 class MonthView extends Component {
@@ -67,7 +70,7 @@ class MonthView extends Component {
       <Card className={classes.banner}>
         <Typography variant="h6">Weather Forcast for the next 7 days</Typography>
       </Card>
-      <Box m={1} />
+      <div className={classes.spacing}></div>
         <Grid container
         direction="row"
         justify="space-between"
@@ -90,7 +93,7 @@ class MonthView extends Component {
             </ButtonBase>
           </Grid>)}
           </Grid>
-      <Box m={1} />
+      <div className={classes.spacing}></div>
       <div>{this.displayDetailedCard()}</div>
       </React.Fragment>
     );

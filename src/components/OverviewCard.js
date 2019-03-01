@@ -43,6 +43,9 @@ const styles = {
   },
   inline: {
     display: 'inline-block'
+  },
+  spacing: {
+    height: 20
   }
 };
 
@@ -83,14 +86,13 @@ class OverviewCard extends Component {
             <CardContent>
               <Typography align='center' variant='h4' color='primary' fontWeight={900}>{formatDtDay(this.props.dt)}</Typography>
               <Typography gutterBottom align='center' color='secondary' variant='subheading'>{formatDtDate(this.props.dt)}</Typography>
-              <Box m={3} />
+              <div className={classes.spacing}></div>
               <div className={classes.icon}>
                 <Skycons
                 color='#2d5982'
                 icon={this.getIcon(this.props.icon_name)}
                 autoplay={true} />
               </div>
-              <Box m={3} />
               <Grid container direction="row" justify="space-around" alignItems="center">
                 <Grid item>
                   <Typography gutterBottom align='right' variant="h4" color='primary' className={classes.inline}>{formatTemperature(this.props.high_temp)}</Typography>
