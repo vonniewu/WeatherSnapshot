@@ -11,17 +11,22 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
+import TemperatureGraph from './graphs/TemperatureGraph.js';
+
 // Import utils UserFunctions
-import { formatDtTime, formatDtDate, formatDtDay, formatTemperature, formatMoonPhase, formatDewPoint,
+import { formatDtDate, formatDtDay, formatTemperature,
   formatPrecipitation, formatHumidity, formatPressure, formatWindSpeed,
   formatCloud, formatUVIndex, formatVisibliity, formatOzone } from '../utils.js';
 
 const styles = theme => ({
   root: {
     maxWidth: '100%',
-    backgroundColor: theme.palette.background.paper,
   },
   card: {
+    width: '100%',
+    padding: 20
+  },
+  paper: {
     width: '100%',
     padding: 20
   },
@@ -65,6 +70,9 @@ class TodayView extends Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
+
+    console.log("TodayView data: ", this.props.data);
+    console.log("TodayView graphdata: ", this.props.data);
 
     return (
       <div className={classes.root}>
@@ -111,7 +119,7 @@ class TodayView extends Component {
                       <Typography gutterBottom align='right' variant="body1" className={classes.inline}>Visibility: {formatVisibliity(obj.visibility)}</Typography>
                     </Grid>
                     <Grid item>
-                      <Typography gutterBottom align='right' variant="body1" className={classes.inline}>Ozone: {formatVisibliity(obj.ozone)}</Typography>
+                      <Typography gutterBottom align='right' variant="body1" className={classes.inline}>Ozone: {formatOzone(obj.ozone)}</Typography>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -120,7 +128,8 @@ class TodayView extends Component {
               <Typography variant="h6" className={classes.weatherDes}>{obj.summary}</Typography>
             </CardContent>
           </Card>
-          <Paper className={classes.root}>
+          <div className={classes.spacing1} />
+          <Paper className={classes.paper}>
             <Tabs
               value={this.state.value}
               onChange={this.handleChange}
@@ -132,7 +141,7 @@ class TodayView extends Component {
               <Tab label="Preciptation" />
               <Tab label="Wind" />
             </Tabs>
-            {value === 0 && <TabContainer>Item One</TabContainer>}
+            {value === 0 && <TabContainer><TemperatureGraph newGraphData={this.props.graphdata} /></TabContainer>}
             {value === 1 && <TabContainer>Item Two</TabContainer>}
             {value === 2 && <TabContainer>Item Three</TabContainer>}
           </Paper>

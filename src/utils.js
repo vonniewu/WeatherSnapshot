@@ -14,7 +14,7 @@ const formatDtDay = dt => `${DAYS[getDateObj(dt).getDay()]}`;
 
 function formatDtTime(dt) {
   var hour = getHour(dt);
-  var newHour = hour - 12;
+  var newHour = hour !== 12 ? hour - 12 : hour;
   return hour === 0 ? '12 AM' : hour < 12 ? `${hour} AM` : `${newHour} PM`;
 }
 
@@ -30,7 +30,6 @@ const formatCloud = cloudCover => `${Math.round(cloudCover*100)}%`;
 const formatUVIndex = uvIndex => `${uvIndex}`;
 const formatVisibliity = visibility => `${visibility} ${visibilityUnit}`;
 const formatOzone = ozone => `${Math.round(ozone)} ${ozoneUnit}`;
-
 
 export {
   formatDtDate,

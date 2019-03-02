@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import OverviewCard from './OverviewCard.js';
-import DetailedCard from './DetailedCard.js';
+// import DetailedCard from './DetailedCard.js';
 
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
@@ -9,8 +9,6 @@ import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import { unstable_Box as Box } from '@material-ui/core/Box';
-
 
 // displayDetailedCard() {
 //   const selectedData = this.props.data[this.state.selectedCard];

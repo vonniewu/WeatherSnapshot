@@ -3,14 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
 import TodayView from './WeatherTodayView.js';
-import WeekView from './WeatherWeekView.js';
 import MonthView from './WeatherMonthView.js';
-import { fetchData } from '../utils.js';
 import { OPEN_WEATHER_API_KEY, DARK_SKY_API_KEY, DARK_SKY_PROXY } from '../credentials.js';
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   todayView: {
@@ -99,8 +96,6 @@ class WeatherManager extends Component {
     })
     .then(response => response.json())
     .then(json => this.setState({ temp_data: json.list}));
-
-    console.log("fetchWeekWeatherData.. daily_data: ", this.state.daily_data);
   }
 
   _fetchDarkSkyWeatherForcast(latitude, longitude) {
@@ -116,7 +111,7 @@ class WeatherManager extends Component {
     .then(json => this.setState({
       darkSkyToday: json.daily.data.slice(0, 1),
       darkSkyNext7Days: json.daily.data.slice(1,8),
-      darkSkyHourly: json.hourly.data,
+      darkSkyHourly: json.hourly.data.slice(0,16),
     }));
 
     console.log("DARKSKY DATA: ", this.state);

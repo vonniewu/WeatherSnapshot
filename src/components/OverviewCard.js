@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
 import Skycons from 'react-skycons';
 
-import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import Grid from '@material-ui/core/Grid';
-import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 // Create Material-UI themes
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
-import yellow from '@material-ui/core/colors/yellow';
 
 // Import global configurations
-import { temperatureUnit } from '../configs.js';
 import { formatDtDay, formatDtDate, formatTemperature } from '../utils.js';
 
 const styles = {
@@ -69,9 +60,6 @@ const theme = createMuiTheme({
 });
 
 class OverviewCard extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   getIcon(icon_id) {
     return icon_id.toUpperCase().replace(/[-]/g, '_');
