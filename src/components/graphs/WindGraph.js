@@ -3,7 +3,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, Tooltip, ResponsiveContainer
 } from 'recharts';
 
-import {formatDtTime, formatPrecipitation} from '../../utils.js';
+import { formatDtTime } from '../../utils.js';
 import { WindTooltip } from '../CustomTooltips.js';
 
 export default class WindGraph extends PureComponent {
@@ -19,7 +19,7 @@ export default class WindGraph extends PureComponent {
 
   _generateGraphDataList() {
     const dataList = [];
-    this.props.newGraphData.map((obj, index) => {
+    this.props.graphData.map((obj, index) => {
       const dataEntry = {
         name: formatDtTime(obj.time),
         windSpeed: obj.windSpeed,

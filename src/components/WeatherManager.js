@@ -132,7 +132,7 @@ class WeatherManager extends Component {
       <div className="weather_container">
         <div className={classes.spacing} />
         <div className={classes.todayView}>
-          <TodayView data={this.state.darkSkyToday} graphdata={this.state.darkSkyHourly} />
+          <TodayView data={this.state.darkSkyToday} graphData={this.state.darkSkyHourly} />
         </div>
         <div className={classes.spacing} />
         <div>

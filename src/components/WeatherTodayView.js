@@ -4,16 +4,11 @@ import '../App.css';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
-import TemperatureGraph from './graphs/TemperatureGraph.js';
-import PrecipitationGraph from './graphs/PrecipitationGraph.js';
-import WindGraph from './graphs/WindGraph.js';
+import WeatherTabs from './WeatherTabs.js';
 
 // Import utils UserFunctions
 import { formatDtDate, formatDtDay, formatTemperature,
@@ -28,10 +23,6 @@ const styles = theme => ({
     width: '100%',
     padding: 20
   },
-  paper: {
-    width: '100%',
-    padding: 20
-  },
   inline: {
     display: 'inline-block'
   },
@@ -43,35 +34,10 @@ const styles = theme => ({
   },
 });
 
-function TabContainer(props) {
-  return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
-      {props.children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-
 class TodayView extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 0,
-    }
-  }
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
 
   render() {
     const { classes } = this.props;
-    const { value } = this.state;
 
     console.log("TodayView data: ", this.props.data);
     console.log("TodayView graphdata: ", this.props.data);
@@ -131,22 +97,7 @@ class TodayView extends Component {
             </CardContent>
           </Card>
           <div className={classes.spacing1} />
-          <Paper className={classes.paper}>
-            <Tabs
-              value={this.state.value}
-              onChange={this.handleChange}
-              indicatorColor="primary"
-              textColor="primary"
-              centered
-            >
-              <Tab label="Temperature" />
-              <Tab label="Precipitation" />
-              <Tab label="Wind" />
-            </Tabs>
-            {value === 0 && <TabContainer><TemperatureGraph newGraphData={this.props.graphdata} /></TabContainer>}
-            {value === 1 && <TabContainer><PrecipitationGraph newGraphData={this.props.graphdata} /></TabContainer>}
-            {value === 2 && <TabContainer><WindGraph newGraphData={this.props.graphdata} /></TabContainer>}
-          </Paper>
+          <WeatherTabs graphData={this.props.graphData} />
           </React.Fragment>
         ))}
       </div>

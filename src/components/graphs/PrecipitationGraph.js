@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import {
-  BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 
-import {formatDtTime, formatPrecipitation} from '../../utils.js';
+import { formatDtTime } from '../../utils.js';
 import { PreciptationTooltip } from '../CustomTooltips.js';
 
 export default class PrecipitationGraph extends PureComponent {
@@ -19,7 +19,7 @@ export default class PrecipitationGraph extends PureComponent {
 
   _generateGraphDataList() {
     const dataList = [];
-    this.props.newGraphData.map((obj, index) => {
+    this.props.graphData.map((obj, index) => {
       const dataEntry = {
         name: formatDtTime(obj.time),
         precip: Math.round(obj.precipProbability*100),
@@ -40,7 +40,6 @@ export default class PrecipitationGraph extends PureComponent {
   }
 
   render() {
-    console.log("PrecipitationGraph.js newGraphData: ", this.props.newGraphData);
     return (
       <ResponsiveContainer width='100%' height={400}>
       <BarChart

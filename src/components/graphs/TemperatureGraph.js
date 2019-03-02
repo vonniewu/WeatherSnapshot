@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 
 import { formatDtTime, formatTemperature } from '../../utils.js';
@@ -19,7 +19,7 @@ export default class TemperatureGraph extends PureComponent {
 
   _generateGraphDataList() {
     const dataList = [];
-    this.props.newGraphData.map((obj, index) => {
+    this.props.graphData.map((obj, index) => {
       const dataEntry = {
         name: formatDtTime(obj.time),
         temp: formatTemperature(obj.temperature)
@@ -38,8 +38,6 @@ export default class TemperatureGraph extends PureComponent {
   }
 
   render() {
-    console.log("Example.js newGraphData: ", this.props.newGraphData);
-
     return (
       <ResponsiveContainer width='100%' height={400}>
       <AreaChart
