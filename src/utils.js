@@ -31,6 +31,7 @@ const formatUVIndex = uvIndex => `${uvIndex}`;
 const formatVisibliity = visibility => `${visibility} ${visibilityUnit}`;
 const formatOzone = ozone => `${Math.round(ozone)} ${ozoneUnit}`;
 
+
 export {
   formatDtDate,
   formatDtDay,

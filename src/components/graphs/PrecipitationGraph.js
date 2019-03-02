@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import {
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+  BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 
-import { formatDtTime, formatTemperature } from '../../utils.js';
-import { TemperatureTooltip } from '../CustomTooltips.js';
+import {formatDtTime, formatPrecipitation} from '../../utils.js';
+import { PreciptationTooltip } from '../CustomTooltips.js';
 
-export default class TemperatureGraph extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
+export default class PrecipitationGraph extends PureComponent {
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/30763kr7/';
 
   constructor(props) {
     super(props);
@@ -22,11 +22,13 @@ export default class TemperatureGraph extends PureComponent {
     this.props.newGraphData.map((obj, index) => {
       const dataEntry = {
         name: formatDtTime(obj.time),
-        temp: formatTemperature(obj.temperature)
+        precip: Math.round(obj.precipProbability*100),
+        humidity: Math.round(obj.humidity*100)
       }
       dataList.push(dataEntry);
       return dataList;
     });
+    console.log("PRECIP dataList: ", dataList);
 
     this.setState({
       data: dataList
@@ -38,11 +40,10 @@ export default class TemperatureGraph extends PureComponent {
   }
 
   render() {
-    console.log("Example.js newGraphData: ", this.props.newGraphData);
-
+    console.log("PrecipitationGraph.js newGraphData: ", this.props.newGraphData);
     return (
       <ResponsiveContainer width='100%' height={400}>
-      <AreaChart
+      <BarChart
         width={500}
         height={300}
         data={this.state.data}
@@ -53,9 +54,11 @@ export default class TemperatureGraph extends PureComponent {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
-        <Tooltip content={<TemperatureTooltip/ >} wrapperStyle={{ border:'1px solid #CCCCCC', backgroundColor: '#ffffff', padding: '10px' }} />
-        <Area type="monotone" dataKey="temp" stroke="#8884d8" fill="#8884d8" activeDot={true} />
-      </AreaChart>
+        <Legend />
+        <Tooltip content={<PreciptationTooltip />} wrapperStyle={{ border:'1px solid #CCCCCC', backgroundColor: '#ffffff', padding: '10px' }} />
+        <Bar name="Chances of Raining" dataKey="precip" fill="#8884d8" />
+        <Bar name="Humidity" dataKey="humidity" fill="#82ca9d" />
+      </BarChart>
       </ResponsiveContainer>
     );
   }

@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import {
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Legend, Tooltip, ResponsiveContainer
 } from 'recharts';
 
-import { formatDtTime, formatTemperature } from '../../utils.js';
-import { TemperatureTooltip } from '../CustomTooltips.js';
+import {formatDtTime, formatPrecipitation} from '../../utils.js';
+import { WindTooltip } from '../CustomTooltips.js';
 
-export default class TemperatureGraph extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
+export default class WindGraph extends PureComponent {
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/c1rLyqj1/';
 
   constructor(props) {
     super(props);
@@ -22,7 +22,8 @@ export default class TemperatureGraph extends PureComponent {
     this.props.newGraphData.map((obj, index) => {
       const dataEntry = {
         name: formatDtTime(obj.time),
-        temp: formatTemperature(obj.temperature)
+        windSpeed: obj.windSpeed,
+        windGust: obj.windGust
       }
       dataList.push(dataEntry);
       return dataList;
@@ -38,24 +39,24 @@ export default class TemperatureGraph extends PureComponent {
   }
 
   render() {
-    console.log("Example.js newGraphData: ", this.props.newGraphData);
-
     return (
       <ResponsiveContainer width='100%' height={400}>
-      <AreaChart
+      <LineChart
         width={500}
-        height={300}
+        height={400}
         data={this.state.data}
         margin={{
-          top: 10, right: 30, left: 15, bottom: 10,
+          top: 10, right: 30, left: 0, bottom: 0,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
-        <Tooltip content={<TemperatureTooltip/ >} wrapperStyle={{ border:'1px solid #CCCCCC', backgroundColor: '#ffffff', padding: '10px' }} />
-        <Area type="monotone" dataKey="temp" stroke="#8884d8" fill="#8884d8" activeDot={true} />
-      </AreaChart>
+        <Tooltip content={<WindTooltip />} wrapperStyle={{ border:'1px solid #CCCCCC', backgroundColor: '#ffffff', padding: '10px' }} />
+        <Legend />
+        <Line name="Wind Speed" type="monotone" dataKey="windSpeed" stroke="#8884d8" activeDot={{ r: 8 }} />
+        <Line name="Wind Gust" type="monotone" dataKey="windGust" stroke="#82ca9d" />
+      </LineChart>
       </ResponsiveContainer>
     );
   }

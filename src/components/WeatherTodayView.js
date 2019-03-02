@@ -12,6 +12,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
 import TemperatureGraph from './graphs/TemperatureGraph.js';
+import PrecipitationGraph from './graphs/PrecipitationGraph.js';
+import WindGraph from './graphs/WindGraph.js';
 
 // Import utils UserFunctions
 import { formatDtDate, formatDtDay, formatTemperature,
@@ -138,12 +140,12 @@ class TodayView extends Component {
               centered
             >
               <Tab label="Temperature" />
-              <Tab label="Preciptation" />
+              <Tab label="Precipitation" />
               <Tab label="Wind" />
             </Tabs>
             {value === 0 && <TabContainer><TemperatureGraph newGraphData={this.props.graphdata} /></TabContainer>}
-            {value === 1 && <TabContainer>Item Two</TabContainer>}
-            {value === 2 && <TabContainer>Item Three</TabContainer>}
+            {value === 1 && <TabContainer><PrecipitationGraph newGraphData={this.props.graphdata} /></TabContainer>}
+            {value === 2 && <TabContainer><WindGraph newGraphData={this.props.graphdata} /></TabContainer>}
           </Paper>
           </React.Fragment>
         ))}
