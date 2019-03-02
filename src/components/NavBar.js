@@ -132,7 +132,9 @@ class NavBar extends Component {
       <AppBar position="static">
           <Toolbar>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              <i className="material-icons">wb_sunny</i> Weather Snapshot
+              <i className="material-icons">wb_sunny</i>
+            </Typography>
+            <Typography className={classes.title} variant="h6" color="inherit" noWrap>Weather Snapshot
             </Typography>
             <div className={classes.grow} />
             <div className={classes.search}>
