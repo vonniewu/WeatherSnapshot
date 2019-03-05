@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 // Import global configurations
-import { formatDtDay, formatDtDate, formatTemperature } from '../utils.js';
+import { formatDtDay, formatDtDate, formatTemperature, getSkycon } from '../utils.js';
 
 const styles = {
   card: {
@@ -61,10 +61,6 @@ const theme = createMuiTheme({
 
 class OverviewCard extends Component {
 
-  getIcon(icon_id) {
-    return icon_id.toUpperCase().replace(/[-]/g, '_');
-  }
-
   render() {
     const { classes } = this.props;
     return (
@@ -77,7 +73,7 @@ class OverviewCard extends Component {
               <div className={classes.icon}>
                 <Skycons
                 color='#2d5982'
-                icon={this.getIcon(this.props.icon_name)}
+                icon={getSkycon(this.props.icon_name)}
                 autoplay={true} />
               </div>
               <Grid container direction="row" justify="space-around" alignItems="center">

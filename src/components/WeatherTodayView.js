@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Skycons from 'react-skycons';
 import '../App.css';
 
 import Card from '@material-ui/core/Card';
@@ -13,7 +14,7 @@ import WeatherTabs from './WeatherTabs.js';
 // Import utils UserFunctions
 import { formatDtDate, formatDtDay, formatTemperature,
   formatPrecipitation, formatHumidity, formatPressure, formatWindSpeed,
-  formatCloud, formatUVIndex, formatVisibliity, formatOzone } from '../utils.js';
+  formatCloud, formatUVIndex, formatVisibliity, formatOzone, getSkycon } from '../utils.js';
 
 const styles = theme => ({
   root: {
@@ -22,6 +23,10 @@ const styles = theme => ({
   card: {
     width: '100%',
     padding: 20
+  },
+  icon: {
+    width: '75%',
+    height: '50%'
   },
   inline: {
     display: 'inline-block'
@@ -39,9 +44,6 @@ class TodayView extends Component {
   render() {
     const { classes } = this.props;
 
-    console.log("TodayView data: ", this.props.data);
-    console.log("TodayView graphdata: ", this.props.data);
-
     return (
       <div className={classes.root}>
       {this.props.data.map((obj, index) => (
@@ -53,11 +55,18 @@ class TodayView extends Component {
               <div className={classes.spacing1} />
               <Grid container direction="row" justify="space-around" alignItems="center" className={classes.tempContainer}>
                 <Grid item>
+                  <div className={classes.icon}>
+                    <Skycons
+                    color='#2d5982'
+                    icon={getSkycon(obj.icon)}
+                    autoplay={true} />
+                  <br />
                   <Typography gutterBottom align='left' variant="h4" className={classes.inline}>{formatTemperature(obj.temperatureMax)}</Typography>
                   <Typography gutterBottom align='left' variant="h6" className={classes.inline}>&#8457;</Typography>
-                  <Typography gutterBottom align='left' variant="h6" className={classes.inline}>/</Typography>
+                  <Typography gutterBottom align='left' variant="h6" className={classes.inline}>|</Typography>
                   <Typography gutterBottom align='left' variant="h4" className={classes.inline}>{formatTemperature(obj.temperatureMin)}</Typography>
                   <Typography gutterBottom align='left' variant="h6" className={classes.inline}>&#8457;</Typography>
+                  </div>
                 </Grid>
                 <Grid item>
                   <Grid container direction="column" justify="space-around" alignItems="center" className={classes.tempContainer}>
@@ -77,18 +86,10 @@ class TodayView extends Component {
                 </Grid>
                 <Grid item>
                   <Grid container direction="column" justify="space-around" alignItems="center" className={classes.tempContainer}>
-                    <Grid item>
                       <Typography gutterBottom align='right' variant="body1" className={classes.inline}>Cloud: {formatCloud(obj.cloudCover)}</Typography>
-                    </Grid>
-                    <Grid item>
                       <Typography gutterBottom align='right' variant="body1" className={classes.inline}>UV Index: {formatUVIndex(obj.uvIndex)}</Typography>
-                    </Grid>
-                    <Grid item>
                       <Typography gutterBottom align='right' variant="body1" className={classes.inline}>Visibility: {formatVisibliity(obj.visibility)}</Typography>
-                    </Grid>
-                    <Grid item>
                       <Typography gutterBottom align='right' variant="body1" className={classes.inline}>Ozone: {formatOzone(obj.ozone)}</Typography>
-                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>

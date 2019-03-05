@@ -31,6 +31,8 @@ const formatUVIndex = uvIndex => `${uvIndex}`;
 const formatVisibliity = visibility => `${visibility} ${visibilityUnit}`;
 const formatOzone = ozone => `${Math.round(ozone)} ${ozoneUnit}`;
 
+// Get animated Skycon Icons
+const getSkycon = icon_id => icon_id.toUpperCase().replace(/[-]/g, '_');
 
 export {
   formatDtDate,
@@ -46,5 +48,6 @@ export {
   formatCloud,
   formatUVIndex,
   formatVisibliity,
-  formatOzone
+  formatOzone,
+  getSkycon
 }

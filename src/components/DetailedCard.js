@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import classnames from 'classnames';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -15,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 // Import utils UserFunctions
-import { formatDtTime, formatTemperature, formatMoonPhase, formatDewPoint,
+import { formatDtTime, formatMoonPhase, formatDewPoint,
   formatPrecipitation, formatHumidity, formatPressure, formatWindSpeed,
   formatCloud, formatUVIndex, formatVisibliity, formatOzone } from '../utils.js';
 
@@ -48,10 +41,6 @@ const theme = createMuiTheme({
 });
 
 class DetailedCard extends Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const { classes } = this.props;

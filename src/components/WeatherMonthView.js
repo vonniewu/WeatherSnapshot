@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import OverviewCard from './OverviewCard.js';
-// import DetailedCard from './DetailedCard.js';
+import DetailedCard from './DetailedCard.js';
 
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Card from '@material-ui/core/Card';
@@ -54,7 +54,27 @@ class MonthView extends Component {
       selectedCard: 0,
     };
     this.selectDetailedCard = this.selectDetailedCard.bind(this);
-    // this.displayDetailedCard = this.displayDetailedCard.bind(this);
+    this.displayDetailedCard = this.displayDetailedCard.bind(this);
+  }
+
+  displayDetailedCard() {
+    const selectedData = this.props.data[this.state.selectedCard];
+    return (
+      <DetailedCard
+      key={this.state.selectedCard}
+      sunriseTime={selectedData.sunriseTime}
+      sunsetTime={selectedData.sunsetTime}
+      moonPhase={selectedData.moonPhase}
+      dewPoint={selectedData.dewPoint}
+      humidity={selectedData.humidity}
+      preciptation={selectedData.precipProbability}
+      pressure={selectedData.pressure}
+      windSpeed={selectedData.windSpeed}
+      windGust={selectedData.windGust}
+      cloudCover={selectedData.cloudCover}
+      uvIndex={selectedData.uvIndex}
+      ozone={selectedData.ozone}
+      visibility={selectedData.visibility} />);
   }
 
   selectDetailedCard(value) {
@@ -69,7 +89,7 @@ class MonthView extends Component {
       <Card className={classes.banner}>
         <Typography variant="h6">Weather Forcast for the next 7 days</Typography>
       </Card>
-      <div className={classes.spacing}></div>
+      <div className={classes.spacing} />
         <Grid container
         direction="row"
         justify="space-between"
@@ -92,7 +112,7 @@ class MonthView extends Component {
             </ButtonBase>
           </Grid>)}
         </Grid>
-      <div className={classes.spacing}></div>
+      <div className={classes.spacing} />
       </React.Fragment>
     );
   }

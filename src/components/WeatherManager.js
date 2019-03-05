@@ -139,7 +139,6 @@ class WeatherManager extends Component {
           <MonthView data={this.state.darkSkyNext7Days} />
         </div>
       </div>
-
     );
   }
 }
