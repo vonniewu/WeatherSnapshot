@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/WeatherSnapshot/precache-manifest.638ae6521fe94a1f306ebec911b23f2c.js"
+  "/weathersnapshot/precache-manifest.0da153f54d884a84936196b33d4f9f0f.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/WeatherSnapshot/index.html", {
+workbox.routing.registerNavigationRoute("/weathersnapshot/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
