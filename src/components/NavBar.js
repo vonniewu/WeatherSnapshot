@@ -19,6 +19,10 @@ const styles = theme => ({
   grow: {
     flexGrow: 1,
   },
+  icon: {
+    margin: 5,
+    verticalAlign: 'baseline'
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
@@ -28,6 +32,7 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    verticalAlign: 'baseline'
   },
   search: {
     position: 'relative',
@@ -131,9 +136,7 @@ class NavBar extends Component {
     return (
       <AppBar position="static">
           <Toolbar>
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              <i className="material-icons">wb_sunny</i>
-            </Typography>
+            <div className={classes.icon}><i className="material-icons">wb_sunny</i></div>
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>Weather Snapshot
             </Typography>
             <div className={classes.grow} />
