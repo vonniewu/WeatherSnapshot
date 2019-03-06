@@ -1,15 +1,15 @@
 {
-  "main.css": "/weathersnapshot/static/css/main.fe2bfe58.chunk.css",
-  "main.js": "/weathersnapshot/static/js/main.f186aed4.chunk.js",
-  "main.js.map": "/weathersnapshot/static/js/main.f186aed4.chunk.js.map",
-  "runtime~main.js": "/weathersnapshot/static/js/runtime~main.7a4e9a4f.js",
-  "runtime~main.js.map": "/weathersnapshot/static/js/runtime~main.7a4e9a4f.js.map",
-  "static/css/2.cf65ce16.chunk.css": "/weathersnapshot/static/css/2.cf65ce16.chunk.css",
-  "static/js/2.d75c0f9f.chunk.js": "/weathersnapshot/static/js/2.d75c0f9f.chunk.js",
-  "static/js/2.d75c0f9f.chunk.js.map": "/weathersnapshot/static/js/2.d75c0f9f.chunk.js.map",
-  "index.html": "/weathersnapshot/index.html",
-  "precache-manifest.0da153f54d884a84936196b33d4f9f0f.js": "/weathersnapshot/precache-manifest.0da153f54d884a84936196b33d4f9f0f.js",
-  "service-worker.js": "/weathersnapshot/service-worker.js",
-  "static/css/2.cf65ce16.chunk.css.map": "/weathersnapshot/static/css/2.cf65ce16.chunk.css.map",
-  "static/css/main.fe2bfe58.chunk.css.map": "/weathersnapshot/static/css/main.fe2bfe58.chunk.css.map"
+  "main.css": "/WeatherSnapshot/static/css/main.fe2bfe58.chunk.css",
+  "main.js": "/WeatherSnapshot/static/js/main.1287424e.chunk.js",
+  "main.js.map": "/WeatherSnapshot/static/js/main.1287424e.chunk.js.map",
+  "runtime~main.js": "/WeatherSnapshot/static/js/runtime~main.1a97a433.js",
+  "runtime~main.js.map": "/WeatherSnapshot/static/js/runtime~main.1a97a433.js.map",
+  "static/css/2.cf65ce16.chunk.css": "/WeatherSnapshot/static/css/2.cf65ce16.chunk.css",
+  "static/js/2.d75c0f9f.chunk.js": "/WeatherSnapshot/static/js/2.d75c0f9f.chunk.js",
+  "static/js/2.d75c0f9f.chunk.js.map": "/WeatherSnapshot/static/js/2.d75c0f9f.chunk.js.map",
+  "index.html": "/WeatherSnapshot/index.html",
+  "precache-manifest.638ae6521fe94a1f306ebec911b23f2c.js": "/WeatherSnapshot/precache-manifest.638ae6521fe94a1f306ebec911b23f2c.js",
+  "service-worker.js": "/WeatherSnapshot/service-worker.js",
+  "static/css/2.cf65ce16.chunk.css.map": "/WeatherSnapshot/static/css/2.cf65ce16.chunk.css.map",
+  "static/css/main.fe2bfe58.chunk.css.map": "/WeatherSnapshot/static/css/main.fe2bfe58.chunk.css.map"
 }
